@@ -1,12 +1,11 @@
 package com.drsync.tourismapp.core.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.drsync.tourismapp.core.data.Resource
 import com.drsync.tourismapp.core.domain.model.Tourism
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 
 interface TourismUseCase {
-    fun getAllTourism(): Flowable<Resource<List<Tourism>>>
-    fun getFavoriteTourism(): Flowable<List<Tourism>>
+    fun getAllTourism(): Flow<Resource<List<Tourism>>>
+    fun getFavoriteTourism(): Flow<List<Tourism>>
     fun setFavoriteTourism(tourism: Tourism, state: Boolean)
 }
