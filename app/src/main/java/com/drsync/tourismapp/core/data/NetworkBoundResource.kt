@@ -1,10 +1,8 @@
 package com.drsync.tourismapp.core.data
 
-import android.annotation.SuppressLint
 import com.drsync.tourismapp.core.data.source.remote.network.ApiResponse
 import kotlinx.coroutines.flow.*
 
-@SuppressLint("CheckResult")
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private var result: Flow<Resource<ResultType>> = flow {
@@ -36,9 +34,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    protected abstract fun createCall(): Flow<ApiResponse<RequestType>>
+    protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 
-    protected abstract fun saveCallResult(data: RequestType)
+    protected abstract suspend fun saveCallResult(data: RequestType)
 
     fun asFlow(): Flow<Resource<ResultType>> = result
 }
