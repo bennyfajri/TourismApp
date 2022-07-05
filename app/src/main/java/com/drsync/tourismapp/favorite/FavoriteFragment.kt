@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drsync.tourismapp.core.ui.TourismAdapter
 import com.drsync.tourismapp.databinding.FragmentFavoriteBinding
 import com.drsync.tourismapp.detail.DetailTourismActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
 //    @Inject
