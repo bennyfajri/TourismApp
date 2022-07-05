@@ -2,8 +2,9 @@ package com.drsync.tourismapp.core.domain.usecase
 
 import com.drsync.tourismapp.core.domain.model.Tourism
 import com.drsync.tourismapp.core.domain.repository.ITourismRepository
+import javax.inject.Inject
 
-class TourismInteractor(
+class TourismInteractor @Inject constructor(
     private val tourismRepository: ITourismRepository
 ): TourismUseCase {
     override fun getAllTourism() = tourismRepository.getAllTourism()
