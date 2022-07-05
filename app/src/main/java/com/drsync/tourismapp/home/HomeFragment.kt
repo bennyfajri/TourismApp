@@ -1,22 +1,31 @@
 package com.drsync.tourismapp.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.drsync.tourismapp.MyApplication
 import com.drsync.tourismapp.R
 import com.drsync.tourismapp.core.data.Resource
 import com.drsync.tourismapp.core.ui.TourismAdapter
+import com.drsync.tourismapp.core.ui.ViewModelFactory
 import com.drsync.tourismapp.databinding.FragmentHomeBinding
 import com.drsync.tourismapp.detail.DetailTourismActivity
-import org.koin.android.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by viewModel()
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val homeViewModel: HomeViewModel by viewModels {
+        factory
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -27,6 +36,11 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

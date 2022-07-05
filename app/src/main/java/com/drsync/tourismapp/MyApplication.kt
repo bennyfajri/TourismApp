@@ -1,31 +1,19 @@
 package com.drsync.tourismapp
 
 import android.app.Application
-import com.drsync.tourismapp.core.di.databaseModule
-import com.drsync.tourismapp.core.di.networkModule
-import com.drsync.tourismapp.core.di.repositoryModule
-import com.drsync.tourismapp.di.useCaseModule
-import com.drsync.tourismapp.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
+import com.drsync.tourismapp.core.di.CoreComponent
+import com.drsync.tourismapp.core.di.DaggerCoreComponent
+import com.drsync.tourismapp.di.AppComponent
+import com.drsync.tourismapp.di.DaggerAppComponent
 
-class MyApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        startKoin {
-            androidLogger(Level.NONE)
-            androidContext(this@MyApplication)
-            modules(
-                listOf(
-                    databaseModule,
-                    networkModule,
-                    repositoryModule,
-                    useCaseModule,
-                    viewModelModule
-                )
-            )
-        }
+
+open class MyApplication : Application() {
+
+    private val coreComponent: CoreComponent by lazy {
+        DaggerCoreComponent.factory().create(applicationContext)
+    }
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.factory().create(coreComponent)
     }
 }
