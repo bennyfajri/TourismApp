@@ -11,7 +11,9 @@ import com.drsync.tourismapp.databinding.ActivityMainBinding
 import com.drsync.tourismapp.favorite.FavoriteFragment
 import com.drsync.tourismapp.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
