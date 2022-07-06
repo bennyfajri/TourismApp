@@ -8,8 +8,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(tourismUseCase: TourismUseCase) : ViewModel() {
-
     val favoriteTourism = tourismUseCase.getFavoriteTourism().asLiveData()
-
 }
 
