@@ -3,11 +3,8 @@ package com.drsync.tourismapp.core.data.source.local
 import com.drsync.tourismapp.core.data.source.local.entity.TourismEntity
 import com.drsync.tourismapp.core.data.source.local.room.TourismDao
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LocalDataSource @Inject constructor(private val tourismDao: TourismDao) {
+class LocalDataSource (private val tourismDao: TourismDao) {
 
 //    companion object {
 //        private var instance: LocalDataSource? = null
