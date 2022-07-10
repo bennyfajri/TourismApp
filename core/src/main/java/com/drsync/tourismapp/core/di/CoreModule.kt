@@ -8,6 +8,8 @@ import com.drsync.tourismapp.core.data.source.remote.RemoteDataSource
 import com.drsync.tourismapp.core.data.source.remote.network.ApiService
 import com.drsync.tourismapp.core.domain.repository.ITourismRepository
 import com.drsync.tourismapp.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -19,10 +21,14 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<TourismDatabase>().tourismDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("drysnc".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             TourismDatabase::class.java, "Tourism.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
